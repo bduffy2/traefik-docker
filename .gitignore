@@ -1,0 +1,76 @@
+# ==========================================
+# Gradle & Java Build Outputs
+# ==========================================
+.gradle/
+build/
+bin/
+out/
+target/
+
+# Keep Gradle Wrapper JAR
+!gradle/wrapper/gradle-wrapper.jar
+!**/gradle/wrapper/gradle-wrapper.jar
+
+# ==========================================
+# IDE & Editor Configuration
+# ==========================================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.apt_generated/
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+
+# Visual Studio Code
+.vscode/
+
+# NetBeans
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+
+# ==========================================
+# Log files & diagnostics
+# ==========================================
+*.log
+logs/
+*.stackdump
+
+# ==========================================
+# OS & Environment Files
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ==========================================
+# Docker & Traefik Local Overrides
+# ==========================================
+docker-compose.override.yml
+.env.local
+.env.*.local
+acme.json
+certs/

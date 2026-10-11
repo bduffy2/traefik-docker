@@ -1,0 +1,19 @@
+# Gradle build outputs
+.gradle/
+build/
+bin/
+out/
+
+# Preserve Gradle Wrapper
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Logs
+*.log

@@ -1,0 +1,9 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /orders
+  forward-headers-strategy: framework
+
+spring:
+  application:
+    name: orders-service

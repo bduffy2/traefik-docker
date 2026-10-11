@@ -1,0 +1,54 @@
+services:
+  traefik:
+    image: traefik:v3
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=internal-net"
+      - "--entrypoints.web.address=:80"
+      - "--accesslog=true"
+      - "--log.level=INFO"
+    environment:
+      - DOCKER_API_VERSION=1.45
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - internal-net
+
+  orders-service:
+    build:
+      context: ./apps/orders-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - internal-net
+    labels:
+      - "traefik.enable=true"
+      - 'traefik.http.routers.orders.rule=PathPrefix(`/orders`)'
+      - "traefik.http.routers.orders.entrypoints=web"
+      - "traefik.http.services.orders.loadbalancer.server.port=8080"
+
+  catalog-service:
+    build:
+      context: ./apps/catalog-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - internal-net
+    labels:
+      - "traefik.enable=true"
+      - 'traefik.http.routers.catalog.rule=PathPrefix(`/catalog`)'
+      - "traefik.http.routers.catalog.entrypoints=web"
+      - "traefik.http.services.catalog.loadbalancer.server.port=8080"
+
+networks:
+  internal-net:
+    driver: bridge
+    name: internal-net
